@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const userRouter = require("./routes/user");
+const goalsRouter = require("./routes/goals");
 dotenv.config();
 
 const app = express();
@@ -20,12 +22,15 @@ app.use(cors(corsOpts));
 
 app.use(express.json());
 
+//Routes
+app.use("/api/users", userRouter);
+app.use("/api", goalsRouter);
 
+//Port
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`server is running great ${port}`);
 });
-
 
 
 
